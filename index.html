@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Franchigia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calcolatore Franchigia</h2>
+        <input type="number" id="costo" placeholder="Inserisci l'importo della fattura...">
+        <select id="percentuale">
+            <option value="10">10%</option>
+            <option value="20" selected>20%</option>
+            <option value="30">30%</option>
+            <option value="40">40%</option>
+            <option value="50">50%</option>
+        </select>
+        <input type="number" id="franchigia" placeholder="Inserire valore franchigia...">
+        <button onclick="calcolaPrezzo()">Calcola</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calcolaPrezzo() {
+            var costoInput = document.getElementById("costo").value;
+            var costo = parseFloat(costoInput);
+            var percentualeInput = document.getElementById("percentuale").value;
+            var percentuale = parseFloat(percentualeInput) / 100;
+            var franchigiaInput = document.getElementById("franchigia").value;
+            var franchigia = parseFloat(franchigiaInput);
+
+            if (costo > 0) {
+                var prezzoFinale = costo * percentuale;
+
+                if (prezzoFinale < franchigia) {
+                    prezzoFinale = franchigia;
+                }
+
+                document.getElementById("result").innerHTML = "Importo che deve pagare il paziente (Bollo escluso): " + prezzoFinale.toFixed(2);
+            } else {
+                document.getElementById("result").innerHTML = "Inserisci un importo valido";
+            }
+        }
+    </script>
+</body>
+</html>
